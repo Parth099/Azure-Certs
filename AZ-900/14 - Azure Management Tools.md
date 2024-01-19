@@ -60,7 +60,7 @@ All requests flow through ARM and it determines if the requested action can be p
 
 A scope is a boundary of control for azure resources; it is a way to govern your resources by placing resources within a logical group and applying rules to the group.
 
-![arm_scopes.png](../img/arm_scopes.png)
+![arm_scopes.png](./img/arm_scopes.png)
 
 
 ### ARM Templates

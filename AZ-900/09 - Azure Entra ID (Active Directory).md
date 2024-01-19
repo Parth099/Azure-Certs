@@ -33,7 +33,7 @@ There are 4 editions of AD
 3. Premium 1 - Advanced Group Access and Conditional Access
 4. Premium 2 - Identity Protection and Governance
 
-![AzureEntraID](../img/AzureEntraID.png)
+![AzureEntraID](./img/AzureEntraID.png)
 
 ### Active Directory Vs ***Azure*** Active Directory
 

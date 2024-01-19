@@ -51,7 +51,7 @@ An **update domain** ensures your resources do not go offline when azure applies
   
 You can utilize Azure Availability Sets to ensure any VMs you setup are not in the same fault/update domain to ensure uptime.
 
-![create_avail_set.png](../img/create_avail_set.png)
+![create_avail_set.png](./img/create_avail_set.png)
 
 Above is an image of creating a Availability set. If you launched 3 VMs in this AS you each would be in a different fault domain.
 

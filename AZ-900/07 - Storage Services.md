@@ -28,7 +28,7 @@ Each Storage account varies on what features it exposes. They many vary in
 + Replication 
 + Deployment Model
 
-![diff_storage_accs](../img/diff_storage_accs.png)
+![diff_storage_accs](./img/diff_storage_accs.png)
 
 > You can think of a storage account as a top-level container or namespace for organizing and managing your data within Azure Storage.
 
@@ -128,7 +128,7 @@ This is the same above  (Secondary Region Redundancy) but all copies are synchro
 
 ### Azure Blob Storage
 
-![AzureBlobStorage1](../img/AzureBlobStorage1.png)
+![AzureBlobStorage1](./img/AzureBlobStorage1.png)
 
 #### Blob Types
 
@@ -155,7 +155,7 @@ You are to mount this volume when using it.
 ### Azure File-Sync
 Azure file-sync allows you to cache Azure Files on a machine (VM or on-prem). You can use any protocol thats available on Windows Server.
 
-![AzureFileSync](../img/AzureFileSync.png)
+![AzureFileSync](./img/AzureFileSync.png)
 
 ### AZ-Copy
 
