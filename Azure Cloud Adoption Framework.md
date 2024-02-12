@@ -2,7 +2,22 @@
 
 Link: [MS](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
 
+An Azure landing zone is an environment that follows key design principles across eight design areas. The point of addressing each design area is to 'accommodate all application portfolios and enable application migration, modernization, and innovation at scale'. 
 
+1. MS Entra Tenant
+2. IAM
+3. Resource Organization
+4. Network Topology
+5. Security
+6. Management
+7. Governance
+8. DevOps
+
+Key Ideas I saw
++ When  performing application migration focus on the application, do perform an infra "Lift and Shift".
+
+left off: [bookmark](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/landing-zone-journey)
+  
 # Azure Well-Architected Framework
 
 Link: [MS](https://learn.microsoft.com/en-us/azure/well-architected)
