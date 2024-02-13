@@ -48,7 +48,13 @@ The goal of this is to package together dependencies like hybrid or multi-cloud 
 
 The docs state that it is in the connectivity management group that subscriptions will host the Azure networking resources required for the platform, like Azure Virtual WAN, Virtual Network Gateways, Azure Firewall, Azure DNS private zones, and esteblish hybrid connectivity. 
 
-Azure reccomends deployment of a Virtual Network Manager in the Connectivity MG to manage VNets across subscriptions.  
+Azure reccomends deployment of a Virtual Network Manager in the Connectivity MG to manage VNets across subscriptions. 
+
+### Security
+
+This refers to applying security requirements consistently across all workloads with Zero-trust and advanced network security. The docs are mostly about using Entra ID and MS Defender.
+
+This area also focuses on using signals to access trust ([Entra Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview)).
 
 # Azure Well-Architected Framework
 
