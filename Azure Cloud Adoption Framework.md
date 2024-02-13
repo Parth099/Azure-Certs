@@ -13,11 +13,43 @@ An Azure landing zone is an environment that follows key design principles acros
 7. Governance
 8. DevOps
 
-Key Ideas I saw
+## Some Key Ideas
 + When  performing application migration focus on the application, do perform an infra "Lift and Shift".
 
-left off: [bookmark](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/landing-zone-journey)
-  
+## Terminology
++ Azure tenant - 'A dedicated and trusted instance of Azure AD that's automatically created when your organization signs up for a Microsoft cloud service subscription'. It is essentially a container for an orgainzation.
++ Azure Managed Identities
+  + System Assigned Identity - Identity created and managed by Azure. This is a 1:1 mapping between resource and Entra entry. This identity is generated when a resource is created.
+  + User Assigned Identity - This is when a user creates an identity and assigns it to a Azure resource. This allows you to assign many resources the same identity for easier management but overdoing this **does** violate security best practices.
+  + To remember pros/cons of each take a look at the images on [ms-docs](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/managed-identity-best-practice-recommendations#choosing-system-or-user-assigned-managed-identities)
++ Azure Role-based Access COntrol (RBAC) - Fine grained permissions for Azure resources (yes users are Azure Resources)
++ Service Principal - [SOF](https://stackoverflow.com/questions/48096342/what-is-azure-service-principal) To put it simply: 'Service principal just work as an impersonation for user in Azure AD' via a `id`/`password`. You assign permissions and use this identity to commit actions without having a login popup.  
+ 
+## Design Areas
+### MS Entra Tenant
+
+This is setting up your management structure (billing offer, subscriptions, ...). 
+
+### Identity and Access Management
+
+This design area is concerned with syncing identies and permissons to Entra ID. This area is not concerned with any _governence_ features like policies or zero-trust.
+
+When creating your infra, you need to select the correct Auth Service. There may be reasons to pick Entra ID over Entra Domain Services or setting up your own AD DS servers.
+
+### Resource Organization
+
+This refers to the design of Subscriptions and Management Groups and refers to Naming and Tagging methods.
+
+Subscripitions serve as a boundary for policy assignments. 
+
+### Network Topology
+
+The goal of this is to package together dependencies like hybrid or multi-cloud dependencies so future networks have it built in. 
+
+The docs state that it is in the connectivity management group that subscriptions will host the Azure networking resources required for the platform, like Azure Virtual WAN, Virtual Network Gateways, Azure Firewall, Azure DNS private zones, and esteblish hybrid connectivity. 
+
+Azure reccomends deployment of a Virtual Network Manager in the Connectivity MG to manage VNets across subscriptions.  
+
 # Azure Well-Architected Framework
 
 Link: [MS](https://learn.microsoft.com/en-us/azure/well-architected)
