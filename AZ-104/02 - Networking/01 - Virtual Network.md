@@ -34,6 +34,8 @@ You would want a 2nd NIC for:
 
 ## Network Security Groups (NSG)
 
+**Important**: By default communication between VMs in the same VNet is allowed. 
+
 ### NSG VM Level
 
 Allows you to define at a `NIC`-level what traffic is allowed in and out of the machine via rules.
@@ -99,5 +101,45 @@ If you wanted to use the bastion service you first require a **empty** subnet fo
 
 These allow you to *customize* routes packets will take in VNets. One example of this is if you would like all traffic routed through a central VM[^2].
 
+To do this you need to define custom routes via a `azurerm_route_table` and then associate them with a subnet. 
+
+## Network Watcher
+
+> Series of Services
+
++ Connection Monitor - Checks the network connectivity between machines on azure or on-prem continually. It will output results on a LAW[^3]. You are able to send L7 HTTP/S requests.
++ Next Hop - See what paths packets takes. Useful for debugging USRs. (See User Defined Routes above.)
++ IP Flow Verify - Troubleshoot Security rules. It will tell you what rule denies your traffic by name. 
++ Connection Troubleshoot - Check connections from VM to anywhere else
++ NSG Diagnostic tool - Lets you see in a sequence which NSG is blocking your traffic. Also shows you which NSG rules were evaluated and their results.
++ Traffic Analytics
++ NSG Flow Logs
+
+When you run these tools a `AzureNetworkWatcherExtension` is installed on source and target machines[^4]. 
+
+## Azure Firewall
+
+> Managed Service with `SKU: Standard` and `SKU: Preimum`.
+
+A firewall can help only appropriate and safe traffic flows out and into your network (VNet or On-prem). A company needs to configure rules to detect traffic types however.
+
+With Azure Firewall, you have 
++ State-full firewall so it understands flows
++ Built in threat intelligence
++ Built-in HA
++ You can add own rules and filter traffic based on IP, Port, FQDNs, ...
+
+**Important**: A Firewall needs its own subnet: `AzureFirewallSubnet`.
+
+By default this firewall will not allow any outgoing traffic. 
+
+## Azure DNS
+
+It is a DNS hosting service much like AWS Route53. Unlike R53 however, you **cannot** buy domains directly from Azure DNS. 
+
+There are also private domains possible where inside your network your domains can behave differently. 
+
 
 [^2]: Notice this can help with security as there exists software to analyze packets.
+[^3]: Log Analytics Workspace
+[^4]: If this a VM or something you can install it on.

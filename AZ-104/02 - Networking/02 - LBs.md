@@ -29,7 +29,7 @@ Below is a example of a LB. The code for this under `./TF Code/L1_LoadBalancer`.
 ### SKU: `Standard` vs `Basic`
 
 + Standard is for high scale and HA applications. Basic SKU is not compatible with AZs.
-+ Backend Pool for Standard can be anything (as long as they are in the same VNet) but for Basic they need to be part of a Availability Set of a VMSS[^1]. 
++ Backend Pool for Standard can be anything (as long as they are in the same VNet) but for Basic they need to be part of a Availability Set or a VMSS[^1]. 
 + Basic has no `HTTPS` health probe.
 + Basic has no SLA whereas Standard has 99.99%
 + Standard can have multiple backend pools which you can configure post-deployment. However, each of the LB rules cannot be the same. For example, a LB cannot route all `:80` requests to `:80` from both pools. The incoming port mappings must differ.

@@ -34,6 +34,20 @@ resource "azurerm_subnet" "subnetA" {
   address_prefixes     = ["10.0.0.0/24"]
 }
 
+resource "azurerm_subnet" "subnetB" {
+  name                 = "subnet-B"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet-main.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+resource "azurerm_subnet" "subnetCentral" {
+  name                 = "subnet-central"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet-main.name
+  address_prefixes     = ["10.0.255.0/24"]
+}
+
 
 resource "azurerm_network_interface" "nicA" {
   name                = "nic-A"
@@ -54,7 +68,7 @@ resource "azurerm_network_interface" "nicB" {
 
   ip_configuration {
     name                          = "nic-B-ip-config"
-    subnet_id                     = azurerm_subnet.subnetA.id
+    subnet_id                     = azurerm_subnet.subnetB.id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -69,13 +83,14 @@ resource "azurerm_public_ip" "central_pip" {
 }
 
 resource "azurerm_network_interface" "nic_central" {
-  name                = "nic-central"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                 = "nic-central"
+  location             = azurerm_resource_group.rg.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  enable_ip_forwarding = true
 
   ip_configuration {
     name                          = "nic-central-ip-config"
-    subnet_id                     = azurerm_subnet.subnetA.id
+    subnet_id                     = azurerm_subnet.subnetCentral.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.central_pip.id
   }
@@ -118,13 +133,13 @@ resource "azurerm_network_security_rule" "allow_http_rule" {
   network_security_group_name = azurerm_network_security_group.allow_ssh_http_nsg.name
 }
 
-resource "azurerm_network_interface_security_group_association" "nsg_association_A" {
-  network_interface_id      = azurerm_network_interface.nicA.id
-  network_security_group_id = azurerm_network_security_group.allow_ssh_http_nsg.id
-}
+# resource "azurerm_network_interface_security_group_association" "nsg_association_A" {
+#   network_interface_id      = azurerm_network_interface.nicA.id
+#   network_security_group_id = azurerm_network_security_group.allow_ssh_http_nsg.id
+# }
 
 resource "azurerm_linux_virtual_machine" "linuxVM_B" {
-  name                = "linux-vm-a"
+  name                = "linux-vm-b"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_B1s"
@@ -135,11 +150,11 @@ resource "azurerm_linux_virtual_machine" "linuxVM_B" {
 
 
   network_interface_ids = [
-    azurerm_network_interface.nicA.id,
+    azurerm_network_interface.nicB.id,
   ]
 
   os_disk {
-    name                 = "linux-vm-a-os-disk"
+    name                 = "linux-vm-b-os-disk"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
@@ -156,4 +171,98 @@ resource "azurerm_linux_virtual_machine" "linuxVM_B" {
     product   = var.vm_image.product_id
     publisher = var.vm_image.publisher
   }
+}
+
+resource "azurerm_linux_virtual_machine" "central_vm" {
+  name                = "central-vm"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  size                = "Standard_B1s"
+  admin_username      = "parth"
+  admin_password      = "parth34cv*!*"
+
+  disable_password_authentication = false
+
+  network_interface_ids = [
+    azurerm_network_interface.nic_central.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+}
+
+# https://askubuntu.com/questions/311053/how-to-make-ip-forwarding-permanent
+# needs to enable os level forwarding
+resource "azurerm_virtual_machine" "vm_a" {
+  name                  = "linux-vm-a"
+  location              = azurerm_resource_group.rg.location
+  resource_group_name   = azurerm_resource_group.rg.name
+  network_interface_ids = [azurerm_network_interface.nicA.id]
+  vm_size               = "Standard_B1s"
+
+  # since we are just playing around
+  delete_os_disk_on_termination    = true
+  delete_data_disks_on_termination = true
+
+  storage_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+  storage_os_disk {
+    name              = "myosdisk2"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+  os_profile {
+    computer_name  = "linux-vm-a"
+    admin_username = "parth"
+    admin_password = "parth34cv*!*"
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+}
+
+resource "azurerm_route_table" "central_routing_table" {
+  name                          = "cr-table"
+  location                      = azurerm_resource_group.rg.location
+  resource_group_name           = azurerm_resource_group.rg.name
+  disable_bgp_route_propagation = false
+
+  route {
+    name                   = "flow-through-central"
+    address_prefix         = "10.0.0.0/16"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = azurerm_linux_virtual_machine.central_vm.private_ip_address
+  }
+}
+
+resource "azurerm_subnet_route_table_association" "central_route_to_ssA" {
+  subnet_id      = azurerm_subnet.subnetA.id
+  route_table_id = azurerm_route_table.central_routing_table.id
+}
+
+resource "azurerm_subnet_route_table_association" "central_route_to_ssB" {
+  subnet_id      = azurerm_subnet.subnetB.id
+  route_table_id = azurerm_route_table.central_routing_table.id
+}
+
+output "central_vm_pip" {
+  value = azurerm_linux_virtual_machine.central_vm.public_ip_address
+}
+
+output "central_vm_priv_ip" {
+  value = azurerm_linux_virtual_machine.central_vm.private_ip_address
 }
