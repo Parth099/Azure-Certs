@@ -11,7 +11,6 @@
 > Contains all your azure storage data objects like: *blobs*, *files*, *queues*, *tables*, and *disks*.
 
 
-
 There are many types of storage accounts and each has different features and pricing. 
 
 + General Purpose
