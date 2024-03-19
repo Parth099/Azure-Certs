@@ -1,6 +1,6 @@
 # Azure Management and Idenities
 
-For machines only `Win10 (not Home) and Windows 2019 DS` can join the Azure Entra ID.
+For machines only `Win10` (not Home) and `Win Server 2019` (Not core) can join the Azure Entra ID.
 
 ## Subscriptions
 
