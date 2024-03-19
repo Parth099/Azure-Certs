@@ -1,5 +1,7 @@
 # Azure Management and Idenities
 
+For machines only `Win10 (not Home) and Windows 2019 DS` can join the Azure Entra ID.
+
 ## Subscriptions
 
 > Used for billing and high-level management.
