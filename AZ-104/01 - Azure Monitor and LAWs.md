@@ -27,7 +27,17 @@ Alert Creation Steps
 4. Next you must choose what to do when an alert is met
     - You have to create actions. You can choose an existing action group or create new.
     - Action Groups are a resource that hold information on how to send a message and who to send it to.
+        - **Important**: You can assign the same _Action Group_ to **many** alerts. 
 5. Assign a alert severity and metadata
+
+### Alert Types
+
+See types at [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types).
+
+The types are:
+1. Metric 
+2. Log Search 
+3. Activity Log - These are like metric but action based. Ex: Shutdown of VM or a resource creation.
 
 ## Monitor: Activity Log
 
