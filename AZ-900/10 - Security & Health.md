@@ -20,7 +20,7 @@
 
 ### Seven Layers of Security
 
-![seven-sec-layers.png](./img/seven-sec-layers.png)
+![seven-sec-layers.png](seven-sec-layers.png)
 
 ---
 
@@ -146,7 +146,7 @@ There is a similar feature known as "Azure Resource Manager Locks" that can put 
 
 ## Management Groups
 
-![ManagementGroups.png](./img/ManagementGroups.png)
+![ManagementGroups.png](ManagementGroups.png)
 
 This helps manage mulitple subscriptions (accounts) into a hierarchical structure. Notice there is a ***root***. All subscriptions within a management group automatically inherit the conditions applied to the management group. 
 

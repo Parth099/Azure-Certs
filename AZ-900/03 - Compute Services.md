@@ -56,7 +56,7 @@ Once a scale set is created you have many options on the conditions (CPU Util., 
 
 Here are some examples of policy settings:
 
-![scaling_policy_example](./img/scaling_policy_example.png)
+![scaling_policy_example](scaling_policy_example.png)
 
 You can get more metrics with **App Insights** which can allow you to choose app-based metrics like Page Load and Session Counts. If you want more information about the VM you may install the Azure Diagnostic Extension within the VM.
 

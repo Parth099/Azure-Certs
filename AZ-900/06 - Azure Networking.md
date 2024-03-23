@@ -54,7 +54,7 @@ This VPN can be one of two gateway types:
 
 ER creates private connections between Azure Data-Centers and Infrastructure on-prem or in a co-location environment. These connections do **not** use the public internet meaning they are faster and offer better security.
 
-![intro-to-ExpressRoute](./img/intro-to-ExpressRoute.png)
+![intro-to-ExpressRoute](intro-to-ExpressRoute.png)
 You may choose to use ExpressRoute *Direct* if you need massive amounts of bandwidth.
 
 ### Point-To-Site Connection

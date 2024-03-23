@@ -12,7 +12,7 @@ Solution for collecting, analyzing, and acting on Telemetry for cloud/on-prem en
 
 ### Anatomy 
 
-![azure_monitor_anatomy](./img/azure_monitor_anatomy.png)
+![azure_monitor_anatomy](azure_monitor_anatomy.png)
 
 #### Log Analytics
 
@@ -33,7 +33,7 @@ They come in three flavors:
 2. Log Alerts
 3. Activity Log Alerts
 
-![azure_alert](./img/azure_alert.png)
+![azure_alert](azure_alert.png)
 
 The monitor condition is used to track and log the state of the alert regarding if it was resolved or not.
 
@@ -51,5 +51,5 @@ Application Insights can
 
 You simply need to instrument your application with Application insights to use it.
 
-![application_insights.png](./img/application_insights.png)
+![application_insights.png](application_insights.png)
 
