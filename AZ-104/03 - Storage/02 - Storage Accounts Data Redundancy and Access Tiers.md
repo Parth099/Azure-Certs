@@ -41,7 +41,7 @@ You can set objects to be moved into different tiers or deleted based on their c
 
 ## Object Replication
 
-This allows you to copy blobs between storage accounts based on rules that decide what gets copied. 
+This allows you to copy **blobs** between storage accounts based on *rules* that decide what gets copied. 
 
 + Requires Versioning to be enabled on the source and destination. 
 + [Change feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) required to be enabled on the source. This is simple a log of all the *changes* to your SA.
@@ -49,4 +49,10 @@ This allows you to copy blobs between storage accounts based on rules that decid
 The copied access tier reflects the default (inferred) access tier of the destination. 
 
 
-
+More about the copy rules (AKA copy policy):
+1. Inside the SA you can choose to copy a container to another container. The whole SA need not get copied. 
+2. You can choose between three rules for choosing objects to copy:
+	+ Only new objects
+	+ All
+	+ Custom
+3. To end the replication you can remove the rule.

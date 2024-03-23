@@ -53,7 +53,19 @@ A SAS token/URL can be generated at the Blob Level (individual object) or at the
 
 The first step in using a Shared Access Policy is selecting a permission type (Read, Write) and a Policy duration. This approach of granting access to a container is better then a SAS because to revoke access you simple remove permissions from the policy used to grant it. 
 #### Azure AD Authentication
+??
 
+
+## Copying Data
+
+There are many methods of moving large amounts of data between Azure and on-prem. There is:
+1. Azure Import/Export Service
+
+In the portal the above service will track your copy progress. Microsoft will send you drives you can use for the copy job. The drive can be encrypted and it will have journal-ing enabled. You are then required to ship this drive back.
+
+This is similar to Azure Data Box where no internet is used to copy files only raw data transfer tools. This is used in no-internet situations where large volumes (GB, TB) need to be moved.
+
+You can also use [azCopy](https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10) to move items to Storage accounts via things like SAS (Shared Access Signatures)
 ### Blob Versioning
 
 A SA can be set to keep versions of a blob. You are able to revert to a prior version if needed.
