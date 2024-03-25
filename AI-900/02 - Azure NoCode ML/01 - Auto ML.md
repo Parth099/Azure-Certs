@@ -19,3 +19,5 @@ All of the following resources and most future resources require whats known as 
 ### Azure ML Studio
 
 A studio gets generated **with** a workspace (see above). This serves as a playground for any models you want to try out *or* want to share with others.
+
+> Most services/models inside the studio need a compute resource to power them. You can choose to provision clusters, provision a singular VM, or attach to on-prem compute.
