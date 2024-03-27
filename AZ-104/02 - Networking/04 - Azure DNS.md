@@ -7,3 +7,5 @@ Allows for custom name resolutions in _linked_ VNets. You are able to link VNets
 ### Virtual Network Links
 
 Once a private zone is created it needs to be linked to a VNet. Once linked, any VM in that VM will, by default, have access to the records in the private zone. You also have the option for `auto-registration`. This allows all present and new VMs to have records automatically created when spawned. If this is not enabled, the private zone is used **only** for resolution.
+
+**Important**: You can create only one link between a private DNS zone and a virtual network. See [docs](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
