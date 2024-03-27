@@ -6,6 +6,8 @@ You are able to view and edit the file structure & files via the Azure Portal. U
 
 On the Azure Portal steps are shown to connect to the AFS, the script **contains** secrets.
 
+The URI for the file share is defined via `\\<storageAccountName>.file.core.windows.net\<fileShareName>`
+
 ## Snapshots
 
 You can take snapshots to protect your share from errors. You can browse and restore files. When you create a snapshot a Resource Lock by the name of `AzureBackupProtectionLock` is created to prevent accidental deletion of the snapshot (backup).
