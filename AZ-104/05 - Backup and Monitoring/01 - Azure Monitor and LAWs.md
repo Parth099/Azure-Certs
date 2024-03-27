@@ -30,6 +30,11 @@ Alert Creation Steps
         - **Important**: You can assign the same _Action Group_ to **many** alerts. 
 5. Assign a alert severity and metadata
 
+The rate limit thresholds are:
+-  SMS: No more than 1 SMS every 5 minutes.
+-  Voice: No more than 1 Voice call every 5 minutes.
+-  Email: No more than 100 emails in an hour.
+
 ### Alert Types
 
 See types at [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types).
