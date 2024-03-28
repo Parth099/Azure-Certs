@@ -64,6 +64,8 @@ When you route Windows logs to a LAW extensions get installed into the VM for th
 
 Many rules like performance counters have a `sample rate` which checks the relevant attribute ever $s$ seconds.
 
+Currently, the only valid source for these rules are Azure VMs and the destination is a LAW.
+
 ### LAW Queries
 
 > KQL Based
