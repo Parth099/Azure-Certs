@@ -15,6 +15,8 @@ There are two types of locks[^1]:
 1. `CanNotDelete`
 2. `ReadOnly`
 
+> You cannot add a resource lock at a Management Group Level
+
 **Important**: A `CanNotDelete` locked resource can still be moved[^2] if the locks are placed on the actual resource. This not true if the resource container[^3] is locked itself. This effectivily states that lock effects trickle down.
 
 ## Azure Policy Service[^4]
