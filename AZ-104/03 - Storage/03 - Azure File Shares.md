@@ -8,6 +8,8 @@ On the Azure Portal steps are shown to connect to the AFS, the script **contains
 
 The URI for the file share is defined via `\\<storageAccountName>.file.core.windows.net\<fileShareName>`
 
+AFS uses the SMB protocol over port 445, this port should be open if you want to access the file share.
+
 ## Snapshots
 
 You can take snapshots to protect your share from errors. You can browse and restore files. When you create a snapshot a Resource Lock by the name of `AzureBackupProtectionLock` is created to prevent accidental deletion of the snapshot (backup).
