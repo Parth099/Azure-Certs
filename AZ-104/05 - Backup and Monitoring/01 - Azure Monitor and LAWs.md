@@ -94,8 +94,15 @@ For this action you  need:
 
 Then you need to:
 
+
 1. Create a table inside the LAW using your sample
 2. Create a Data Collection rule
     + Use the endpoint from before
     + Select resource to obtain logs from
     + Create a custom data source entry in which you map the log file and LAW table
+
+### Customer Managed Storage
+
+See [docs](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/private-storage).
+
+Azure Monitor Logs relies on Azure Storage in various scenarios and this is usually managed by the monitor, but sometimes you need a customer managed storage account. This Storage account must be in the region as the workspace it's linked to.
