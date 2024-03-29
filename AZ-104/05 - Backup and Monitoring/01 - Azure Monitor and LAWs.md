@@ -48,6 +48,11 @@ The types are:
 
 This is a log of all control-place actions on your azure account. For example it will record SA actions like uploading Blobs or actions like creating a VM. You can see which users are doing what with this tool.
 
+## Azure Advisor
+
+Azure Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. It analyzes your resource configuration and usage telemetry and then recommends solutions that can help you improve the cost-effectiveness, performance, reliability, and security of your Azure resources. Advisor also can look into under-ultized resources and prescribe recommendations to help with costs.
+
+
 ## Log Analytics Workspace (LAW)
 
 > Central logging Solution
