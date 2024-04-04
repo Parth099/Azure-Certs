@@ -30,6 +30,11 @@ Alert Creation Steps
         - **Important**: You can assign the same _Action Group_ to **many** alerts. 
 5. Assign a alert severity and metadata
 
+The rate limit thresholds are:
+-  SMS: No more than 1 SMS every 5 minutes.
+-  Voice: No more than 1 Voice call every 5 minutes.
+-  Email: No more than 100 emails in an hour.
+
 ### Alert Types
 
 See types at [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-types).
@@ -42,6 +47,11 @@ The types are:
 ## Monitor: Activity Log
 
 This is a log of all control-place actions on your azure account. For example it will record SA actions like uploading Blobs or actions like creating a VM. You can see which users are doing what with this tool.
+
+## Azure Advisor
+
+Azure Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. It analyzes your resource configuration and usage telemetry and then recommends solutions that can help you improve the cost-effectiveness, performance, reliability, and security of your Azure resources. Advisor also can look into under-ultized resources and prescribe recommendations to help with costs.
+
 
 ## Log Analytics Workspace (LAW)
 
@@ -58,6 +68,8 @@ The rules that persist data onto LAWs are known as Data Collection Rules which a
 When you route Windows logs to a LAW extensions get installed into the VM for this purpose.
 
 Many rules like performance counters have a `sample rate` which checks the relevant attribute ever $s$ seconds.
+
+Currently, the only valid source for these rules are Azure VMs and the destination is a LAW.
 
 ### LAW Queries
 
@@ -89,8 +101,15 @@ For this action you  need:
 
 Then you need to:
 
+
 1. Create a table inside the LAW using your sample
 2. Create a Data Collection rule
     + Use the endpoint from before
     + Select resource to obtain logs from
     + Create a custom data source entry in which you map the log file and LAW table
+
+### Customer Managed Storage
+
+See [docs](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/private-storage).
+
+Azure Monitor Logs relies on Azure Storage in various scenarios and this is usually managed by the monitor, but sometimes you need a customer managed storage account. This Storage account must be in the region as the workspace it's linked to.

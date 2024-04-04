@@ -13,6 +13,9 @@ You can backup your VM data inside a vault and choose a backup policy. The backu
 The way recovery works is that the service will trigger a snapshot which will initially be saved on the VM locally but then is later uploaded to the vault. You may choose to keep these instant snapshots for longer as they serve as a recovery point.
 
 Azure VM Recovery via the Recovery Vault **will not** be able to backup VMs where the managed disks are set to false.[^1]
+### Azure Recovery Vault
+
+This entity house recovery data from VMs and DBs (ex: `Azure SQL`). You can use this service to enable replication for a VM to set up disaster recovery **to a secondary region**. The service will install extensions to start replicating data. When you need to perform a recovery you can simple choose a restore point and a VM in the secondary to restore to.
 
 ### File Restore
 

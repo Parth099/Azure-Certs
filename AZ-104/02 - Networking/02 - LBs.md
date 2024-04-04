@@ -33,6 +33,7 @@ Below is a example of a LB. The code for this under `./TF Code/L1_LoadBalancer`.
 + Basic has no `HTTPS` health probe.
 + Basic has no SLA whereas Standard has 99.99%
 + Standard can have multiple backend pools which you can configure post-deployment. However, each of the LB rules cannot be the same. For example, a LB cannot route all `:80` requests to `:80` from both pools. The incoming port mappings must differ.
++ Public IP Sku and LB Sku **MUST** match
 
 
 ### LB Outbound Rules

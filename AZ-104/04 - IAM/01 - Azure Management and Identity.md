@@ -76,6 +76,8 @@ Roles here can be of type "Eligible" or "Active":
 + Active will permanently assigns the role
 + Eligible will allow the user to take up the role between the time window
 
+You are able to clone roles to speed up development. You **cannot** however, clone in-built roles. 
+
 ### Custom AD Domain
 
 You first need to own a domain (ex: `www.cloud.com`)

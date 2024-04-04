@@ -70,7 +70,7 @@ This features allows you to access resources within the VNet such as databases. 
 
 ## Custom Domains
 
-To add a custom domain you are required to be on at least the standard plan.
+To add a custom domain you are required to be on at least the standard plan. Then you need to insert a `TXT` record named `ausid` on the DNS Host to prove you own the domain. 
 
 ## Backup
 

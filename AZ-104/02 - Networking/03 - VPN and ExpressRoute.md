@@ -30,6 +30,13 @@ When connecting via VPN there needs to be authentication.
 
 One option is certificates which allow you authenticate machines onto the network. Other options involve Entra ID.
 
+### Steps
+
+1. Deploy a gateway subnet.
+2. Deploy VPN Gateway. This allows you to send traffic over the MS backbone network
+3. Deploy a Local Network Gateway, this represents the hardware/software on-prem
+4. Deploy the VPN Connection
+
 
 ## Azure Virtual WAN
 
