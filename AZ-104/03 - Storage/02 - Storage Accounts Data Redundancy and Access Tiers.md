@@ -17,6 +17,9 @@ By default multiple copies (3) of your data is saved at the minimum. This is cal
 + **GZRS** - 6 copies exist. Primary region uses ZRS while secondary region uses LRS.
 	+ Has the same options as GRS with the read-only vs default.
 
+
+Only GRS and GZRS options are replicated asynchronously, the other options are synchronously. Note you **cannot** choose the replication region; MS has paired regions preset.  
+
 ## Access Tiers
 There is a cost for storing and accessing objects.
 
@@ -56,3 +59,5 @@ More about the copy rules (AKA copy policy):
 	+ All
 	+ Custom
 3. To end the replication you can remove the rule.
+
+For replication, both the source and target storage accounts, you can only use **general-purpose v2 or premium block blob** storage accounts.

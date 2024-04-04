@@ -1,0 +1,1 @@
+az network vnet subnet create -g "networking-rg" --vnet-name "vnet01" -n "s1" --address-prefixes "10.0.255.16/28"

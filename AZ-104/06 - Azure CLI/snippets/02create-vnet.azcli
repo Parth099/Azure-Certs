@@ -1,0 +1,1 @@
+az network vnet create --name "vnet01" --resource-group "networking-rg" --address-prefixes "10.0.255.0/24" --subnet-name "s0" --subnet-prefixes "10.0.255.0/28"

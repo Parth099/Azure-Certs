@@ -1,0 +1,1 @@
+az network nic ip-config update --name "nic01-ip-conf" --nic-name "nic01" -g "networking-rg" --public-ip-address "nic01-pip"

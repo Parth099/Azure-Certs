@@ -1,0 +1,1 @@
+az vm create --resource-group "networking-rg" --name "vm01" --image "Canonical:0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2:latest" --authentication-type "password" --admin-username "parth" --admin-password "parth34cv(!)" --nics "nic01" --size "Standard_B2s" --location "eastus"

@@ -12,9 +12,11 @@ You can backup your VM data inside a vault and choose a backup policy. The backu
 
 The way recovery works is that the service will trigger a snapshot which will initially be saved on the VM locally but then is later uploaded to the vault. You may choose to keep these instant snapshots for longer as they serve as a recovery point.
 
+Azure VM Recovery via the Recovery Vault **will not** be able to backup VMs where the managed disks are set to false.[^1]
+
 ### File Restore
 
-This method also supports file restores from existing restore points, the service generates an executable[^1] allowing you to mount the drive onto another computer. This process will attach whatever volumes existed on the VM and takes a few mins to complete.
+This method also supports file restores from existing restore points, the service generates an executable[^2] allowing you to mount the drive onto another computer. This process will attach whatever volumes existed on the VM and takes a few mins to complete.
 
 ### VM Recovery
 
@@ -64,4 +66,5 @@ ASR needs an SA active as VM changes are first cached on the SA before being syn
 
 
 
-[^1]: Recall at this point you would not be able to go on your VM. We are under the impression it is down.
+[^1]: Managed disks are when Azure manages your VM disk for you. 
+[^2]: Recall at this point you would not be able to go on your VM. We are under the impression it is down.

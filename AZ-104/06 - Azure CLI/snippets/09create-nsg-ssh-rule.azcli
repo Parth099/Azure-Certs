@@ -1,0 +1,1 @@
+az network nsg rule create --name "allow-ssh" --nsg-name "nsg01" -g "networking-rg" --priority 500 --access "Allow" --protocol "Tcp" --direction 'Inbound' --source-address-prefixes Internet --source-port-ranges "*" --destination-address-prefix "VirtualNetwork" --destination-port-ranges 22

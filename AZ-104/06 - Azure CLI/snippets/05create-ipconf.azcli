@@ -1,0 +1,1 @@
+az network nic ip-config create --name "nic01-ip-conf" --nic-name "nic01" -g "networking-rg"

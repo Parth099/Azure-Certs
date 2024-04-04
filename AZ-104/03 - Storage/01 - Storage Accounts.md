@@ -55,6 +55,10 @@ The first step in using a Shared Access Policy is selecting a permission type (R
 #### Azure AD Authentication
 ??
 
+#### Network Based Auth
+
+You can allow connections from certain IP address (Public), VNets, or resource type. 
+
 
 ## Copying Data
 

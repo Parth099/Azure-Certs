@@ -1,0 +1,1 @@
+az network nic create -g "networking-rg" --vnet-name "vnet01" --subnet "s1" -n "nic01"

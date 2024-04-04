@@ -27,7 +27,7 @@ See notes from AZ-900.
 
 > Horizontal Scaling
 
-Scale sets increase/decrease the number of **identical** VMs based on CPU load or other metrics.
+Scale sets increase/decrease the number of` **identical** VMs based on CPU load or other metrics.
 
 You **must** define scale in (remove VMs) and scale out (add VMs). 
 
