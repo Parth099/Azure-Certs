@@ -81,8 +81,8 @@ When peering the process must be reflexive. This means that Network $A$ must be 
 allow_virtual_network_access - (Optional) Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to `true`.
 ```
 
-If you disconnect a peer, you must delete the disconnected peer to re-establish the connection.
-
+-  If you disconnect a peer, you must delete and recreate the disconnected peer to re-establish the connection.
+-  If you add an address space to a peered VNet you need to re-sync the connection ([docs](https://learn.microsoft.com/en-us/powershell/module/az.network/sync-azvirtualnetworkpeering?view=azps-11.4.0))
 
 Terraform Code: `AZ-104/02 - Networking/TF Code/L3_vnet_peering`
 
