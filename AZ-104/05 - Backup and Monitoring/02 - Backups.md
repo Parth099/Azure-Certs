@@ -19,7 +19,7 @@ This entity house recovery data from VMs and DBs (ex: `Azure SQL`). You can use 
 
 ### File Restore
 
-This method also supports file restores from existing restore points, the service generates an executable[^2] allowing you to mount the drive onto another computer. This process will attach whatever volumes existed on the VM and takes a few mins to complete.
+This method also supports file restores from existing restore points, the service generates an executable[^2] allowing you to mount the drive onto another computer. This process will attach whatever volumes existed on the VM and takes a few mins to complete. There is a catch however, you **cannot** restore files to a previous or future operating system version. For example, you can't restore a file from a Windows Server 2016 VM to Windows Server 2012 or a Windows 8 computer.
 
 ### VM Recovery
 
