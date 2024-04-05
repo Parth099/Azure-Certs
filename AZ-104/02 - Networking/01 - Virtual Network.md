@@ -69,7 +69,7 @@ You can attach NSGs to Subnets as well. This way, all NSG rules apply to ALL res
 
 Recall that the NSG can define rules based on IP Addresses, but what occurs when those IP address change but you are using IP addresses to control access to a service? This issue is worsened if there are many machines. 
 
-The *solution* is to make each of your VMs part of a ASG and then use the ASG to control access to the resource (DB, other VMs, ...). This makes it so all you would need is one rule in your NSG to `allow` from your created ASG.
+The *solution* is to make each of your VMs part of a ASG and then use the ASG to control access to the resource (DB, other VMs, ...). This makes it so all you would need is one rule in your NSG to `allow` from your created ASG. You make VMs part of an ASG by associating their NIC to a ASG. All NICS in a ASG **must** exist in the same VNet.
 
 ## VNet Peering
 
