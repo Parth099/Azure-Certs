@@ -8,7 +8,7 @@ On the Azure Portal steps are shown to connect to the AFS, the script **contains
 
 The URI for the file share is defined via `\\<storageAccountName>.file.core.windows.net\<fileShareName>`
 
-AFS uses the SMB protocol over port 445, this port should be open if you want to access the file share.
+AFS uses the SMB protocol over port 445, this port should be open if you want to access the file share. Note files are not accessible over ports `80,443` implying AFS cannot be used with a CDN the way Azure Blob service can.
 
 ## Snapshots
 
