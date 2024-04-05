@@ -14,7 +14,7 @@ Examples of plans:
 
 ![aap_plans_ex](../img/aap_plans_ex.png)
 
----
+An app service plan is **required** to be in the same region as the app it is supporting. If the app needs to be created/cloned in a different region another plan is required.
 
 ## Azure Web App Logging
 
