@@ -15,6 +15,11 @@ This is possinle via the `Bulk Operations` button on the users tab. Azure will g
 
 This allows you to trigger MFA on certain conditions (signals). 
 
+THere are two types of access controls in a conditional access policy
+
+1. Grant Control: enforces grant or block access to resources. (This one has the MFA controls)
+2. Session Control: enables limited experiences within specific cloud applications
+
 ### Conditional Access Polices
 
 Policy Creation Steps
