@@ -35,7 +35,8 @@ Alerts can take action when a metric hits a certain threshold over some timefram
 
 ```
 [
-    Notification Type -> Users
+    {Notification Type -> UsersGroupA},
+    {Notification Type -> UsersGroupB}
 ]
 ```
 
