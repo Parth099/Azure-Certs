@@ -1,0 +1,21 @@
+# Data Protection Strategy
+
+-   One of the protection strategies was Geo-redundant storage. This helps protect against natural disasters
+    -   This design has a `active` region and a `standby` region. The `standby` region contains paired resources with the `active` region to ensure availability despite disasters.
+    -   This is one of the uses for `Traffic Manager` which can perform a DNS failover when required.
+        -   Failover from `Traffic Manager` does take a few mins to occur.
+-   Encryption & Security
+    -   Most Azure services are encrypted at rest you can choose from CMK or MMK (Microsoft-Managed Keys)
+    -   You can also force HTTPS Connections to ensure traffic is encrypted
+    -   Dynamic Data Masking - You can choose to mask certain fields on a DB like names or other PII.
+    -   Use Service Endpoints & Private Endpoints if required
+    -   Use SQL Database Firewall
+    -   Try to use Azure AD over SQL Authentication (`user/password`)
+    -   Row Level Security: Do not give all users access to all rows.
+    -   ATP (Advanced Thread Protection) can be enabled to analyze incoming traffic to detect common patterns like known malicious IP addresses
+    -   Azure Monitor Log & Alerts to detect odd activity
+-   Scale
+    -   You can increase DTUs (relative) or increment the hardware (vCPU)
+    -   There is downtime when doing this manual scaling action. Auto-scaling is not possible
+    -   You can create read-replicas which takes load off the write DB.
+    -   Sharding. You can store certain divisions in different DB servers. The downside is having to know where data is stored
