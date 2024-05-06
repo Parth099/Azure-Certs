@@ -1,5 +1,22 @@
 # Monitoring Partial
 
+## Log Routing
+
+Two types of log data:
+1. Metrics - Numerical Values at near real-time
+2. Logs - event driven, varies in data. Can be queried. 
+
+
+**Considerations**
++ Data leaving a region to/from a LAW is changed per `GB`. 
++ Does data from different clients / purposes need to be separated?
++ How much logging do you need? Do you need each metric / log per resource type?
++ How long should logs be stored?
+
+## Azure Monitor
+
+Logging and diagnostics is under the Azure Monitor service. You can view resources here that do and do not have logging enabled.
+
 ## Monitoring
 
 ### Monitoring - Logs/Metrics
