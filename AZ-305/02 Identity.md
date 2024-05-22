@@ -71,11 +71,17 @@ You can allow Entra ID to manage this authentication via:
 -   External partner access (think B2C)
     -   You may use this if you want people to access items inside your domain yet do not want them to be a part of your domain
 
+**Helpful Services**
+1. **Microsoft Entra Enterprise Applications** allows you to integrate external applications, including on-premises applications, with Microsoft Entra. By configuring the application as an Enterprise Application, you can enable single sign-on (SSO) for remote users without the need for VPN access.
+2. **Microsoft Entra entitlement management** leverages Microsoft Entra business-to-business (B2B) functionality to facilitate access sharing and collaboration with external individuals who are not part of your organization.
+
 #### Authentication Security
 
 1. IPSec - Usually for VPNs at the IP Layer and uses Auth Header Signing to prove identity.
 2. S2S VPN - No traffic sees the internet
 3. MFA
+4. **Microsoft Entra Application Proxy**
+	+ This provides a secure remote access to WebApps after a SSO to Entra ID. Users can access both cloud applications and on-prem applications. 
 
 #### Password Resets
 
@@ -85,10 +91,10 @@ This Entra ID feature allows users to reset based on reset policies.It does requ
 
 > What actions you are able to commit
 
-There are differnt types of authorization in terms of the cloud:
+There are different types of authorization in terms of the cloud:
 
 1. What you as the **user** are allowed to do
-2. What the resource is allwoed to do
+2. What the resource is allowed to do
 
 The two based Authoization granting methods are:
 1. Role based

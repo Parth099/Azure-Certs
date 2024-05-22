@@ -40,6 +40,7 @@ Note: NSGs do not apply when using PE/PLS
     + Can be used to route users based on Geographical Settings
     + Supports Caching 
 4. Front Door
+	+ CDN
 
 
 [^1]: Wide Area Network
