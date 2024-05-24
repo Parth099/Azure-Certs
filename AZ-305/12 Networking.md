@@ -42,5 +42,10 @@ Note: NSGs do not apply when using PE/PLS
 4. Front Door
 	+ CDN
 
+## BGP
+
+> Border Gateway Protocol (BGP) is the standard routing protocol commonly used on the Internet to exchange routing and reachability information between two or more networks.
+
+BGP helps to connect on-prem and Azure Networks and subsequent resources. When BGP is used with Express Route, it allows Azure Access to your Route Tables and it can update these tables in real-time to reflect actual reachability information which may effect nearest routable `on-prem<->azure` connections.
 
 [^1]: Wide Area Network
