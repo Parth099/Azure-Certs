@@ -8,7 +8,13 @@ Many managed services have features unmanaged features cannot. For example Azure
 
 ## NoSQL and Relational Solutions
 
-> Not going to take many notes here I know whats going on here already
+**Cosmos DB** is a NoSQL / Relational DB for modern apps.
+
+Access to resources is done via tokens:
+1. Master Token - this token has access to all resources under any Cosmos DB under an account.
+2. Resource Token - like SAS Tokens from storage.
+
+To grant specfic users access control, you can assign IAM roles.
 
 ## Database Auditing
 
