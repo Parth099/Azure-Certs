@@ -26,6 +26,8 @@ Entra ID supports:
 4. Application Registration
 5. Device Registration
 6. Licensing
+7. MFA via _Conditional Access_ which allows you to define access controls based on specific conditions.
+8. SSO via _Enterprise Applications_ which allow you to integrate your on-premises financial application with Microsoft Entra for SAML-based SSO.
 
 Some Entra ID Features:
 
