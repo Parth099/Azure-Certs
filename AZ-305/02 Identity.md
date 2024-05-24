@@ -16,7 +16,7 @@
 
 Microsoft Entra ID (formerly Azure AD) is the identity solution for cloud-based applications. There can be senarios where Entra ID [Domain Services](https://learn.microsoft.com/en-us/entra/identity/domain-services/overview) will be required.
 
-Here are sample app auth flows via [OAuth2](https://learn.microsoft.com/en-us/entra/architecture/auth-oauth2).
+Here are sample app auth flows via [[OAuth2](https://learn.microsoft.com/en-us/entra/architecture/auth-oauth2)](https://media.tutorialsdojo.com/Azure-AD-OAuth-2.png).
 
 Entra ID supports:
 
@@ -76,6 +76,8 @@ You can allow Entra ID to manage this authentication via:
 **Helpful Services**
 1. **Microsoft Entra Enterprise Applications** allows you to integrate external applications, including on-premises applications, with Microsoft Entra. By configuring the application as an Enterprise Application, you can enable single sign-on (SSO) for remote users without the need for VPN access.
 2. **Microsoft Entra entitlement management** leverages Microsoft Entra business-to-business (B2B) functionality to facilitate access sharing and collaboration with external individuals who are not part of your organization.
+3. **Azure Identity Governance** is a service that helps orgs to manage and govern user access to resources. It provides a set of features that allow the creation of access policies and reviews.
+	+ "Access reviews allow you to automate the process of reviewing and removing access to resources. You can create a review that targets all users who have access to the specific app, and then set the review to run monthly. The Administrator will be notified of the review, and they can then attest to whether each user still needs access to the app. If a user no longer needs access, the review will automatically remove them as a guest."
 
 #### Authentication Security
 
