@@ -82,8 +82,11 @@ You can allow Entra ID to manage this authentication via:
 1. IPSec - Usually for VPNs at the IP Layer and uses Auth Header Signing to prove identity.
 2. S2S VPN - No traffic sees the internet
 3. MFA
-4. **Microsoft Entra Application Proxy**
-	+ This provides a secure remote access to WebApps after a SSO to Entra ID. Users can access both cloud applications and on-prem applications. 
+4. **App Registration** is a feature that allows you to configure Microsoft Entra authentication for TD-Zambales
+5. **Microsoft Entra Application Proxy**
+	+ This provides a secure remote access to WebApps after a SSO to Entra ID. Users can access both cloud applications and on-prem applications.
+6. **Microsoft Entra pass-through authentication** this focuses on authenticating and validating against a on-prem active directory.
+7. ***Microsoft Entra entitlement management**: functionality to facilitate access sharing and collaboration with external individuals who are not part of your organization. With this feature, users can authenticate via their home AD but still have a presense in your AD, allowing you to assign permissions.
 
 #### Password Resets
 
