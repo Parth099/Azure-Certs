@@ -41,3 +41,11 @@ Other more advanced policy examples include
 + CORS
 + Transformations
 
+## App Service - Function App
+
+Functions can also serve as an API. With functions you get three types of funciton HTTP Authorization Levels:
+1. Anonymous - no API Key Required
+2. Function - API Key Required
+3. Admin - Master Key Required
+
+
