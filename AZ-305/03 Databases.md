@@ -14,7 +14,14 @@ Access to resources is done via tokens:
 1. Master Token - this token has access to all resources under any Cosmos DB under an account.
 2. Resource Token - like SAS Tokens from storage.
 
-To grant specfic users access control, you can assign IAM roles.
+To grant specific users access control, you can assign IAM roles.
+
+Azure Cosmos DB provides the following guaranteed SLA:
+
+- Availability
+- Throughput
+- Consistency
+- Latency
 
 ## Database Auditing
 

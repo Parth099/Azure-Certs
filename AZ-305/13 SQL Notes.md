@@ -8,7 +8,7 @@
 3. SQL Product Family only supports RSA 2048 & 3072
 4. All 3[^2] support a data retention period of 10 years.
 5. **Serverless SQL** - There is a compute tier on azure that scales based on demand for SQL DBs. It will only incur cost during usage and can be auto-paused[^3]. This model cannot be used with DTU, only vCore model can be employed here.
-6. 
+
 
 
 
