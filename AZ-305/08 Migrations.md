@@ -3,6 +3,8 @@
 Most companies already have things they need to migrate (DB, VMs, Storage Drives, ...). 
 Sometimes knowing what to migrate is hard. It is an additional challenge trying to move a existing/running application. To put it shortly, migrations are risky.
 
+One core service that aids in migrations is called `Azure Migrate`:it can help you assess, migrate, and manage your on-premises workloads to Azure. Supported workloads include: servers, databases, applications, and storage. It can help you migrate VMs by looking at usage data for the VM it is migrating, and then recommending appropriate VM size.
+
 ## Data Migration
 
 One thing to understand, data is always changing and sometimes large[^1].
