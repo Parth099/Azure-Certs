@@ -3,7 +3,7 @@
 > EntraID P2 feature.
 
 
-There are many roles in Entra Id which you can assign to a user or group manually.[^2] Azure roles[^3] are far more flexible, you may assign azure roles to a more extensive set of groups (dynamic, ...) and a broader control of scope (MG, Subscription, RG, ...).
+There are many roles in Entra Id[^1] which you can assign to a user or group manually[^2]. However, Azure roles[^3] are far more flexible, you may assign azure roles to a more extensive set of groups (dynamic, ...) and a broader control of scope (MG, Subscription, RG, ...).
 
 This aformentioned method of permanent role assignment poses a large security risk as exposed credentials will have these entitlements until removed. Since removal takes time, a threat actor may do real damage. Thus the solution is `JIT` (Jist in time) access. The base user may have basic perms but when elevated, they are able to select from a their eligible assignments after proving their identity[^4].
 
@@ -48,7 +48,7 @@ This method is a lot more efficient than regular PIM assignments. Suppose you ne
 
 Here is an API ive found that enables control over PIM using an [API Endpoint](https://learn.microsoft.com/en-us/graph/api/privilegedaccessgroup-post-eligibilityschedulerequests?view=graph-rest-1.0&tabs=http)
 
-[^1]: Other tenants that trust tenant T.
+[^1]: Entra ID roles are not the same as Azure roles such as `Global Admin` or `Helpdesk Admin`
 [^2]: Group requires a boolean set to be the target of role assignments
-[^3]: Roles that pertain to Azure Resources and not Entra ID. 
+[^3]: Roles that pertain to Azure Resources like `Contributor` or `Storage Data Blob Owner`
 [^4]: MFA, Security Question, ...
