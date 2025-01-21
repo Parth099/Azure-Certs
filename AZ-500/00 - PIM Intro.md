@@ -39,7 +39,7 @@ You may look at your audit history [here](https://learn.microsoft.com/en-us/entr
 
 You also have the ability to apply PIM to **azure resources**. But first you have to _discover_ them and import the resources to PIM.
 
-With this pane you have the option to allow PIM-ing to your azure roles (custom or built-in) and select the scope you require. Much like the above section you have the base settings. 
+With this pane you have the option to allow PIM-ing to your azure roles (custom or built-in) and select the scope you require. Much like the above section, you have the base settings. 
 
 ### Group Based Role Assignments w/PIM
 
@@ -47,6 +47,7 @@ With this pane you have the option to allow PIM-ing to your azure roles (custom 
 This method is a lot more efficient than regular PIM assignments. Suppose you need 3 Entra Roles and 3 Azure Roles. It is not practical for an Admin to give you 6 PIM Eligible Assignments. It will be easier on the Admin to create a group with those roles assigned and **allow** you to elevate yourself to be a temporary member of the group.
 
 Here is an API ive found that enables control over PIM using an [API Endpoint](https://learn.microsoft.com/en-us/graph/api/privilegedaccessgroup-post-eligibilityschedulerequests?view=graph-rest-1.0&tabs=http)
+
 
 [^1]: Entra ID roles are not the same as Azure roles such as `Global Admin` or `Helpdesk Admin`
 [^2]: Group requires a boolean set to be the target of role assignments
