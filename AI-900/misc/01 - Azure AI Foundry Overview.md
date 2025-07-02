@@ -62,11 +62,50 @@ Tracing is how you may debug your AI-based app. It is a dashboard built on top o
 
 #### Fine Tuning
 
-> Fine Tuning is not RAG
+> Fine Tuning is not RAG. This is typically used for Smaller Models
 
 This changes the behavior outside of the System prompt.
 
 See that model weights have been determined by the provider of the subject model. Here is the fine tuning process 
+
+1. Model Exists with default weights (original traning)
+2. Generate File $F$ with input & output
+3. Send $F$ to the fine tuning exercise 
+4. Model is updated
+
+This can be used to changed to model for speaking more legally or better for medical talks.
+
+#### Distillation
+
+In this scheme you are often giving a LLM a set of data and them this data is used to generate some traning data $T$. Then $T$ is used as $F$ in the fine tuning process. 
+
+#### Inferencing API
+
+Suppose your APP is using AI Models inside via an API. You may use the Inferencing API which is a layer above the actual API for the model you are trying to use. The goal of the Inferencing API is to allow you to write a set of API calls which can target any model as Azure in the background will transform your calls depending on the model you need.  
+
+## Safety 
+
+> You are unsure what an LLM may output
+
+### Content Filters
+
+Lets call the input $I$ and the output $O$. 
+
+Categories can be applied to $I$ and $O$ in terms of text and images to ensure certain items are not put into the model OR output from the model. 
+
+Azure also allows you to 
+- block jailbreak attacks
+- block indirect attacks
+
+These are known are prompt shields. 
+
+These filters can be applied to $I/O$ allow your better catching of items. 
+
+Custom Categories are also applicable
+- allows you to block certain topics
+- allows you ensure model stays grounded
+
+
 
 ## Trends AI
 
@@ -74,5 +113,35 @@ See that model weights have been determined by the provider of the subject model
     -   Set the correct model for the task and price
 -   Agents
 -   SLM (mil, bil) vs LLM (Trillions of Params)
+
+## Agents
+
+There is an Agent Service, it can run tasks on your behalf. You are able to give it these items
+
+1. Tasks 
+2. Actions (ex: Azure Function endpoints)
+3. Information (ex: Azure AI search)
+
+Often times agents can work together to perform self validation
+
+## Using AI Foundary
+
+### Hubs
+
+Centralized *Repo* for your AI service
+- Data
+- endpoints
+- connections
+- security settings ...
+
+### Projects
+
+A child of a Hub. 
+
+This data is isolated as its solely for the project. The Hub keeps all the shared items. 
+
+
+
+
 
 [^1]: You are able to create copilots from natural language prompts to a builder.
