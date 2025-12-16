@@ -29,3 +29,16 @@ IAM objects are
   - Policies are useless if they arent attached to an Identity (first 3 objects)
  
 
+### Credentials
+
+- IAM Access Keys
+  - IAM User can have at most 2 Access keys which can be made to be active or not at anytime. Regeneration/Rotation is also possible
+
+### AWS Organizations
+
+Organizations helps manage larger organizations manage their large number of AWS Accounts. One account becomes the `management` account, it can invite other accounts to be in the organization OR create accounts directly within the org. There are OU (Organizational units), a container for grouping AWS accounts within an AWS Organization, creating a hierarchy to simplify centralized management. One benefit of AWS Organizations, is consolidated. 
+
+See that this changes the way we think about IAM now, one AWS account[^1] can simply have all the users & roles and then issue roles to access aws accounts within the org. 
+
+
+[^1]: Does not have to be the `management` account. Can be a seperate "login" account. 
