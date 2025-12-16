@@ -1,0 +1,77 @@
+# Intro to VPC
+
+## Public vs Private (Networking)
+
+- Private Services refer to services running inside the VPC.
+- Public Services refer to services can be consumed by the internet.
+
+There are three zones to consider:
+
+1. Public Zone  (See Above)
+2. Private Zone (See Above)
+3. AWS Public Zone
+  - Where AWS Public services reside. Ex: S3
+  - If a service gets a public-ip address, it is projected to this zone. 
+
+## VPCs
+
+- Min Size: `/28` -> Max Size: `/16`
+- Regional
+- Nothing is allowed in or out without explicit config
+- VPCs have two modes
+  - default
+  - dedicated
+- VPCs can use public OR private IPv4
+- Has 1 Primary Private IPv4 block
+  - Optional 2nd-ary blocks
+
+ ### DNS
+
+ - Provided by R53
+ - `Base IP +2` Address
+ - Setting can be enabled to give instances DNS Names
+ - Setting can be enabled to turn on or off DNS resolution within the VPC
+
+### Subnets
+
+Subnets are by default private and later can be set to public. One subnet is tied to one AZ. 
+
+- By Default, subnets can speak to each other within the VPC.
+
+Subnets have 5 reserved address. 
+
+- +0 -> Starting Address
+- +1 -> VPC Router
+- +2 -> DNS
+- +3 -> TBD
+- -1 -> Broadcast Address
+
+#### DHCP 
+
+The DHCP Option Set is, inherited from the VPC, you can only have one. 
+
+
+On Normal networks, DHCP on L2 allows devices to exhange their L2 Identifer (Mac Addr) for Network information (L3):
+- IP Address
+- Subnet Mask
+- Default Gateway
+- DNS Servers / Domain Name
+- ...
+
+##### Option Sets
+
+- Immutable Post-Creation
+- One Set can be used by MANY VPCs
+- One VPC can use at most one set
+
+This is where you would configure the DNS server to use. 
+
+#### VPC Router
+
+
+     
+  
+### VPC Creation Senario
+
+> Suppose you had an application with 3 tiers and needed to be AZ Resliant over 3 AZs. This application had services needing to access the internet as well. 
+
