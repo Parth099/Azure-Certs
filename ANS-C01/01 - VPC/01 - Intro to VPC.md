@@ -42,6 +42,7 @@ Subnets have 5 reserved address.
 
 - +0 -> Starting Address
 - +1 -> VPC Router
+  - See `VPC Router` section below. This address is an address to an interface to the VPC router.
 - +2 -> DNS
 - +3 -> TBD
 - -1 -> Broadcast Address
@@ -68,7 +69,14 @@ This is where you would configure the DNS server to use.
 
 #### VPC Router
 
+Performs following routing
+1. Between Subnets
+2. To/From External Networks like internet or on-prem
 
+Details:
+- Runs in all AZ the VPC is. 
+- Can influence routes via the Route Table Resource (attaches at Subnet Level)
+  - By Default a main RT is created and attached to ALL subnets.     
      
   
 ### VPC Creation Senario
