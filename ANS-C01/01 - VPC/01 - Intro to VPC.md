@@ -79,7 +79,12 @@ Details:
   - By Default a main RT is created and attached to ALL subnets.     
      
   
-### VPC Creation Senario
+### IPv6 in AWS VPCs
 
-> Suppose you had an application with 3 tiers and needed to be AZ Resliant over 3 AZs. This application had services needing to access the internet as well. 
+IPv6 address in AWS are always routable. This does imply a NAT Gateway **does not** support IPv6. However, if it is required that your IPv6 machines are not sent any data from the internet they can be placed behind a EO (Egress Only) IG (Internet Gateway).
+
+In Route tables, IPv4 & IPv6 address have different routes in the table. 
+
+IPv6 can be enabled post-creation too for VPCs & Subnets
+
 
