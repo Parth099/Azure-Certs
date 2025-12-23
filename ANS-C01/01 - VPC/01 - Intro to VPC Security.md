@@ -41,3 +41,18 @@ They can be attached to:
 - ENIs
 
 They are NOT realtime and they can dump data into S3 or CloudWatch Logs. 
+
+## VPC Traffic Mirroing
+
+Traffic mirroring can be used to inspect packets or for logging. You can setup a mirror service to send traffic which is destined for some ENI, to another endpoint like an ENI or NLB. 
+
+There can be a filter based on
+- direction
+- action
+- protocol
+- SRC/DEST
+- ...
+
+This mirror is using UDP 4789. 
+
+Only reqirement is that mirroring is required to be in the same region. 
