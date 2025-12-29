@@ -72,12 +72,8 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-resource "aws_route_table" "rt" {
-  vpc_id = aws_vpc.vpc.id
-}
-
 resource "aws_subnet" "subnet" {
-  for_each = { for s, v in local.subnets_to_create : "${v.az}-${v.tier}" => v }
+  for_each = { for s, v in local.subnets_to_create : "${each.value.tier}-sn-${each.value.az}" => v }
   vpc_id   = aws_vpc.vpc.id
 
 
@@ -85,17 +81,12 @@ resource "aws_subnet" "subnet" {
   cidr_block        = each.value.cidr
   availability_zone = each.value.az
 
+  map_public_ip_on_launch = each.value.tier == "web"
+
   tags = {
-    Name = "${each.value.tier}-sn-${each.value.az}"
+    Name = each.key
     tier = each.value.tier
   }
-}
-
-resource "aws_route_table_association" "rt_assoc" {
-  for_each = aws_subnet.subnet
-
-  subnet_id      = each.value.id
-  route_table_id = aws_route_table.rt.id
 }
 
 resource "aws_security_group" "ec2_sg" {
@@ -148,9 +139,9 @@ resource "aws_iam_instance_profile" "ssm" {
   role = aws_iam_role.ssm_role.name
 }
 
-resource "aws_instance" "vms" {
+resource "aws_instance" "web_servers" {
 
-  count = 2
+  count = 1
 
   ami           = "ami-068c0051b15cdb816"
   instance_type = "t3.micro"
@@ -158,7 +149,7 @@ resource "aws_instance" "vms" {
 
   subnet_id                   = aws_subnet.subnet["us-east-1a-web"].id
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
-  associate_public_ip_address = false
+  associate_public_ip_address = true
 
 
   tags = {
@@ -168,3 +159,28 @@ resource "aws_instance" "vms" {
   iam_instance_profile = aws_iam_instance_profile.ssm.name
 }
 
+## Internet Gateway Section
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = "web-igw"
+  }
+}
+
+resource "aws_route_table" "internet_rt" {
+  vpc_id = aws_vpc.vpc.id
+}
+
+resource "aws_route" "igw_route" {
+  route_table_id         = aws_route_table.internet_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
+}
+
+resource "aws_route_table_association" "internet_rt_assoc" {
+  for_each = { for k, s in aws_subnet.subnet : k => s if s.tags["tier"] == "web" }
+
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.internet_rt.id
+}
