@@ -30,6 +30,16 @@ A **public subnet** is a subnet with a internet gateway route attached.
     - Associate RT
 4. Add route to IGW (`/0`-> IGW)
 
+
+#### Bastion Hosts[^2]
+
+- Server at a network's edge
+   - gatekeeper between two zones (public -> private)
+
+Bastions hosts allow you to login to it, since it likely has a public address, which then you can use it to log into the private machines in the private zones. 
+
+
+
 ### Egress ONLY IGW
 
 > Does what it says
@@ -37,7 +47,18 @@ A **public subnet** is a subnet with a internet gateway route attached.
 This may seem redundant for IPv4 (NAT Gateway) but since all IPv6 is routable this is useful. 
 
 
+## Bring Your Own IP
 
+With the normal process, AWS owns the IPs you are using. 
+
+See that this is required as AWS needs to advertize their IPs via BGP. You are able to follow a process to get your IPs into AWS which will authorize AWS to advertize your IPs. 
+
+The process is not documented here but it involves cryptographically signed documents which prove ownership and ability to advertize.
+
+Limits:
+- smallest is /24
+- 5 IPv4 and IPv6 ranges per account (cannot share between accounts)
 
 
 [^1]: We are not thinking about Private Endpoints
+[^2]: a.k.a Jumpbox
