@@ -59,6 +59,28 @@ Limits:
 - smallest is /24
 - 5 IPv4 and IPv6 ranges per account (cannot share between accounts)
 
+## Network Addres Translation
+
+Prior to the NAT Gateway, NAT was provided via a `NAT-Instance` which was an EC2 running Linux AMI. This approach is not suggested _anymore_. 
+
+### NAT Gateway
+
+Consider two subnets $P_x$ (private) and $P$ (public). Now suppose all EC2 machines $M_i$ are deployed to $P_x$.
+
+If $M_i$ needed to connect to the internet we need to deploy a NAT Gateway to $P$. It is important here to understand that the NAT Gateway has a public address (provided by IGW) and a private address provided by the VPC. For internet connectivity, the RT of $P_x$ needs to forward all traffic to the NAT GW.
+
+Facts
+- AZ Resliant 
+- 45 GBPS Bandwidth
+- Cost per GB cost
+- Elastics can be used
+  - this implies IP cannot change
+- No Security Groups on NAT Gateway Resource
+
+If your destination is S3/DynamoDB, you can use this `gateway-endpoint` resource: [AWS-Docs](https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html).
+
+
+
 
 [^1]: We are not thinking about Private Endpoints
 [^2]: a.k.a Jumpbox

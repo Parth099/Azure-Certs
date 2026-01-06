@@ -73,7 +73,7 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "subnet" {
-  for_each = { for s, v in local.subnets_to_create : "${each.value.tier}-sn-${each.value.az}" => v }
+  for_each = { for s, v in local.subnets_to_create : "${v.tier}-sn-${v.az}" => v }
   vpc_id   = aws_vpc.vpc.id
 
 
@@ -139,26 +139,6 @@ resource "aws_iam_instance_profile" "ssm" {
   role = aws_iam_role.ssm_role.name
 }
 
-resource "aws_instance" "web_servers" {
-
-  count = 1
-
-  ami           = "ami-068c0051b15cdb816"
-  instance_type = "t3.micro"
-
-
-  subnet_id                   = aws_subnet.subnet["us-east-1a-web"].id
-  vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
-  associate_public_ip_address = true
-
-
-  tags = {
-    Name = "vm-networking-${count.index + 1}"
-  }
-
-  iam_instance_profile = aws_iam_instance_profile.ssm.name
-}
-
 ## Internet Gateway Section
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
@@ -183,4 +163,68 @@ resource "aws_route_table_association" "internet_rt_assoc" {
 
   subnet_id      = each.value.id
   route_table_id = aws_route_table.internet_rt.id
+}
+
+## Nat GW Section
+resource "aws_route_table" "nat_rt" {
+  for_each = { for k, s in aws_subnet.subnet : k => s if s.tags["tier"] == "web" }
+  vpc_id   = aws_vpc.vpc.id
+}
+
+
+resource "aws_eip" "lb" {
+  for_each = { for k, s in aws_subnet.subnet : k => s if s.tags["tier"] == "web" }
+  domain   = "vpc"
+
+  tags = {
+    Name = "nat-eip-${each.key}"
+  }
+}
+
+resource "aws_route" "nat_route" {
+
+  for_each = { for k, s in aws_route_table.nat_rt : k => s }
+
+  route_table_id         = each.value.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat_gw[each.key].id
+}
+
+resource "aws_nat_gateway" "nat_gw" {
+  for_each = { for k, s in aws_subnet.subnet : k => s if s.tags["tier"] == "web" }
+
+  allocation_id = aws_eip.lb[each.key].id
+  subnet_id     = each.value.id
+
+  tags = {
+    Name = "nat-gw-${each.key}"
+  }
+}
+
+resource "aws_route_table_association" "nat_rt_assoc" {
+  for_each = { for k, s in aws_subnet.subnet : k => s if s.tags["tier"] != "web" }
+
+  subnet_id      = each.value.id
+  route_table_id = one([for k, rt in aws_route_table.nat_rt : rt.id if strcontains(k, each.value.availability_zone)])
+}
+
+/// EC2 Instance for testing SSM
+resource "aws_instance" "web_servers" {
+
+  count = 1
+
+  ami           = "ami-068c0051b15cdb816"
+  instance_type = "t3.micro"
+
+
+  subnet_id                   = aws_subnet.subnet["app-sn-us-east-1a"].id
+  vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
+  associate_public_ip_address = false
+
+
+  tags = {
+    Name = "vm-networking-${count.index + 1}"
+  }
+
+  iam_instance_profile = aws_iam_instance_profile.ssm.name
 }
