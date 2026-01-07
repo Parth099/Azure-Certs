@@ -49,4 +49,9 @@ Interface Endpoints do not use RT+Prefixes for routing. They use DNS. Each inter
 
 Applications may use the DNS names above OR utlize private DNS which would override default DNS AWS r53 provides. This option is enabled by default so that now any application will not need a patch to migrate to interface endpoints.
 
+#### Example: EC2 Instance Connect Endpoint
+
+There is an option to connect to a private EC2 Instance via an interface endpoint. This is called "Connect Using EC2 Instance Connect Endpoint".
+
+The connection requester (*you*) is sending data to AWS's public API infrastructure, and they're pushing it through the endpoint. When the SSH connection is initiated the endpoint acts as a relay for the EC2 and sends the data over the endpoint which is then displayed via the EC2 Instance Connect UI. 
 
