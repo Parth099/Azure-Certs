@@ -16,6 +16,15 @@ locals {
   }
 }
 
+## Sample s3 for EC2 Query
+resource "aws_s3_bucket" "bucket" {
+  bucket = "endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
+
+  tags = {
+    Name = "endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
+  }
+}
+
 resource "aws_vpc" "vpc" {
   cidr_block       = local.vpc_cidr
   instance_tenancy = "default"
