@@ -53,5 +53,7 @@ Applications may use the DNS names above OR utlize private DNS which would overr
 
 There is an option to connect to a private EC2 Instance via an interface endpoint. This is called "Connect Using EC2 Instance Connect Endpoint".
 
-The connection requester (*you*) is sending data to AWS's public API infrastructure, and they're pushing it through the endpoint. When the SSH connection is initiated the endpoint acts as a relay for the EC2 and sends the data over the endpoint which is then displayed via the EC2 Instance Connect UI. 
+The connection requester (*you*) is sending data to AWS's public API infrastructure, and they're pushing it through the endpoint. When the SSH connection is initiated the endpoint acts as a relay for the EC2 and sends the data over the endpoint which is then displayed via the EC2 Instance Connect UI. When the EC2 window is loaded, you will see that the connection request is _coming_ from the Interface IP of the endpoint.[^1] 
+
+[^1]: There is an option to have connections stem from requester IP.
 
