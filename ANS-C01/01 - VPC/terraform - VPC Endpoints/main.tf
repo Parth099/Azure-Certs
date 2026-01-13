@@ -5,24 +5,18 @@ locals {
       cidr = "10.16.0.0/24"
       az   = "us-east-1a"
     }
-    "web-1a" = {
+    "app-1b" = {
       cidr = "10.16.1.0/24"
-      az   = "us-east-1a"
+      az   = "us-east-1b"
     }
     "endpoints-1a" = {
       cidr = "10.16.2.0/24"
       az   = "us-east-1a"
     }
   }
-}
 
-## Sample s3 for EC2 Query
-resource "aws_s3_bucket" "bucket" {
-  bucket = "endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
-
-  tags = {
-    Name = "endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
-  }
+  private_bucket_name = "private-endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
+  public_bucket_name  = "public-endpoint-test-bucket-${data.aws_caller_identity.current.account_id}"
 }
 
 resource "aws_vpc" "vpc" {
@@ -94,8 +88,8 @@ resource "aws_route_table_association" "rta" {
 }
 
 ## EC2 Information
-resource "aws_iam_role" "s3_reader" {
-  name = "ec2-s3-reader-role"
+resource "aws_iam_role" "s3_admin" {
+  name = "ec2-s3-admin-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -111,14 +105,14 @@ resource "aws_iam_role" "s3_reader" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "s3_reader" {
-  policy_arn = data.aws_iam_policy.s3_read_only.arn
-  role       = aws_iam_role.s3_reader.name
+resource "aws_iam_role_policy_attachment" "s3_admin" {
+  policy_arn = data.aws_iam_policy.s3_full_access.arn
+  role       = aws_iam_role.s3_admin.name
 }
 
-resource "aws_iam_instance_profile" "s3_reader" {
-  name = "ec2-s3-reader-iprofile"
-  role = aws_iam_role.s3_reader.name
+resource "aws_iam_instance_profile" "s3_admin" {
+  name = "ec2-s3-admin-iprofile"
+  role = aws_iam_role.s3_admin.name
 }
 
 resource "aws_instance" "web_servers" {
@@ -137,7 +131,7 @@ resource "aws_instance" "web_servers" {
     Name = "vm-s3-endpoint-access-${count.index + 1}"
   }
 
-  iam_instance_profile = aws_iam_instance_profile.s3_reader.name
+  iam_instance_profile = aws_iam_instance_profile.s3_admin.name
 }
 
 ## Endpoints
@@ -152,6 +146,59 @@ resource "aws_ec2_instance_connect_endpoint" "ec2_cep" {
   }
 }
 
+### Design
+
+/*
+ - Design Endpoint policy that only allows a certain S3 Bucket (private)
+ - Design Bucket that only accepts traffic from the VPC Endpoint
+*/
+
+#### S3
+## Sample s3 for EC2 Query
+resource "aws_s3_bucket" "private_bucket" {
+  bucket = local.private_bucket_name
+
+  tags = {
+    Name = local.private_bucket_name
+  }
+}
+
+resource "aws_s3_bucket_policy" "allow_access_from_endpoint_only" {
+  bucket = aws_s3_bucket.private_bucket.id
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "Access-to-specific-VPCE-only",
+        "Principal" : "*",
+        "Action" : "s3:*",
+        "Effect" : "Deny",
+        "Resource" : [
+          aws_s3_bucket.private_bucket.arn,
+          "${aws_s3_bucket.private_bucket.arn}/*"
+        ],
+        "Condition" : {
+          "StringNotEquals" : {
+            "aws:sourceVpce" : aws_vpc_endpoint.s3_gateway.id
+          }
+          "ArnNotEquals" : {
+            "aws:PrincipalArn" : data.aws_caller_identity.current.arn # avoids lockout, gives your identity full access
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_s3_bucket" "public_bucket" {
+  bucket = local.public_bucket_name
+
+  tags = {
+    Name = local.public_bucket_name
+  }
+}
+#### S3 Gateway Endpoint
+
 resource "aws_vpc_endpoint" "s3_gateway" {
   vpc_id            = aws_vpc.vpc.id
   service_name      = "com.amazonaws.us-east-1.s3"
@@ -160,7 +207,34 @@ resource "aws_vpc_endpoint" "s3_gateway" {
   route_table_ids = [
     aws_route_table.rt.id
   ]
+
+  # Allows Any S3 Bucket to be seen
+  # Allows ONLY private s3 bucket to be interacted with
+  policy = jsonencode({
+    "Version" : "2008-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Principal" : "*",
+        "Action" : [
+          "s3:ListAllMyBuckets",
+          "s3:GetBucketLocation"
+        ]
+        "Resource" : "*"
+      },
+      {
+        "Effect" : "Allow",
+        "Principal" : "*",
+        "Action" : "s3:*",
+        "Resource" : [
+          aws_s3_bucket.private_bucket.arn,
+          "${aws_s3_bucket.private_bucket.arn}/*"
+        ]
+      }
+    ]
+  })
 }
+
 
 /*
 NOW head to EC2 and run 
