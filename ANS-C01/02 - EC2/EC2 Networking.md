@@ -61,8 +61,47 @@ Limits
 -   Some SG rules are required
     -   Allow all self-reference rule
 
+## EC2 Placement Groups
+
+By default, when an EC2 is created, AWS picks the best EC2 host for it to place your instance on.
+
+-   Cluster
+    -   pack instances close
+    -   When created, AZ choise isnt present, the first instance launched determines the AZ all of the placement group will be in.
+    -   AWS tries to keep the instances in the sane **rack** and/or **host**
+    -   Single stream of data transfer goes from 5 GPBS to 10 GPBS
+    -   Single AZ (obvious)
+    -   Can span VPC Peers
+    -   Only certain EC2 Types supported
+    -   Tips
+        -   Launch instances all at once to aid AWS into keeping instances close
+        -   use same type of instance
+-   Spread
+    -   keep instances away by using distinct racks when deploying EC2 Instances over different AZs
+    -   7 instances per AZ limit
+-   Partition
+    -   groups of instances away
+    -   can be created over many AZs in a region
+        -   per AZ you designate "partitions" (7 per AZ max) and then you can deploy the required number of EC2s to the partition.
+
+## EC2 Instance Metadata
+
+EC2s learn "what"[^6] they are via Instance Metadata service. EC2 instances call on the service IP `169.254.169.254\latest\meta-data`
+
+This services exposes the following to the EC2s:
+
+1. Environment
+2. Networking
+3. Authentication
+    - instance roles
+    - temp SSH keys for instance log-on
+4. User-Data
+
+This service from the EC2 is **unauthenticated**.
+
 [^1]: Elastic Network Interface
 [^2]: Recall NSGs apply to an ENI and not an EC2 Instance.
 [^3]: Single Route IO Virtualization
 [^4]: What is a flow? 5-tuple of SRC-IP, DEST-IP, SRC-Port, DEST-Port, and Protocol
 [^5]: Elastic Network Adapter
+[^6]: The Environment
