@@ -1,0 +1,5 @@
+zone "aws.tapped-in.net" { 
+  type forward; 
+  forward only;
+  forwarders { 10.16.103.33; 10.16.44.216; }; 
+};

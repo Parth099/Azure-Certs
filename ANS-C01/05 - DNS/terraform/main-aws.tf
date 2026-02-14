@@ -161,11 +161,18 @@ resource "aws_instance" "cloud_ec2" {
   iam_instance_profile   = aws_iam_instance_profile.cloud_ec2_profile.name
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
+  tags = {
+    Name = "aws-server-${each.key}"
+  }
 }
 
 ## R53 AWS DNS Section
 resource "aws_route53_zone" "hosted_zone" {
   name = var.dns_domain
+
+  vpc {
+    vpc_id = aws_vpc.cloud_vpc.id
+  }
 }
 
 resource "aws_route53_record" "a_record" {
