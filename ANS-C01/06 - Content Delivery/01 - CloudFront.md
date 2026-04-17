@@ -118,3 +118,11 @@ Flow:
 - User clicks on https://cdn.example.com/videos/movie.mp4
 - Browser automatically sends the cookies to CloudFront
 - CloudFront checks: "Is this signature valid?" → Yes → Serves video
+
+### Field Level Encryption
+
+This feature is meant for applications handling sensitive data. 
+
+Suppose we are transporting credit card transactions. Cloudfront can be given a public key to encrypt this field so that even when the HTTPs is unwrapped by the origin server, the actual value of the transaction cannot be seen. 
+
+Note: Without this feature, everytime the HTTPs tunnel is terminated our data exists in plain-text and thus can be read. 
